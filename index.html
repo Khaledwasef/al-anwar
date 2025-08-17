@@ -6,7 +6,7 @@
     <title>شركة الأنوار | الأدوات الكهربائية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
             --primary: #f7b837;
@@ -26,16 +26,13 @@
             font-family: 'Tajawal', sans-serif;
         }
 
-        /* إلغاء الـ outline عند الضغط */
-*:focus {
-    outline: none;
-}
+        *:focus {
+            outline: none;
+        }
 
-/* إزالة تأثير اللمس الأزرق في الموبايل */
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
         
         body {
             background-color: #f9f9f9;
@@ -184,46 +181,15 @@
             padding-right: 20px;
         }
         
-        /* Hero Section with Video */
+        /* Hero Section */
         .hero {
-            height: 80vh;
+            height: 70vh;
             display: flex;
             align-items: center;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-        
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: calc(100% + 74.8px);
-            overflow: hidden;
-            z-index: -1;
-        }
-        
-        .video-container video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: brightness(0.6);
-        }
-        
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(47, 47, 49, 0.8) 0%, rgba(33, 37, 41, 0.9) 100%);
-            z-index: -1;
+            background: linear-gradient(rgba(47, 47, 49, 0.8), rgba(33, 37, 41, 0.9)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
         }
         
         .hero-content {
@@ -362,31 +328,96 @@
             background: linear-gradient(to bottom, #f5f5f5, #e9ecef);
         }
         
-        .products-filter {
-            display: flex;
-            justify-content: center;
+        /* Advanced Filters */
+        .advanced-filters {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
             margin-bottom: 40px;
-            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .filter-btn {
-            background-color: white;
-            border: 2px solid var(--complementary);
+        .filters-title {
+            font-size: 1.4rem;
             color: var(--complementary);
-            padding: 8px 20px;
-            margin: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filters-title i {
+            margin-left: 10px;
+            color: var(--primary);
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--complementary);
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            background-color: #f8f9fa;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(247, 184, 55, 0.2);
+        }
+        
+        .apply-filter-btn {
+            display: block;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
             border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 500;
+            margin: 20px auto 0;
+            box-shadow: 0 5px 15px rgba(129, 11, 11, 0.3);
         }
         
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            color: white;
+        .apply-filter-btn:hover {
+            background-color: #6e0909;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(129, 11, 11, 0.4);
         }
         
+        .apply-filter-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .apply-filter-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -489,6 +520,12 @@
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--complementary);
+        }
+        
+        .product-company {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 5px;
         }
         
         .product-price {
@@ -714,85 +751,21 @@
             color: #aaa;
         }
         
-        /* Excel Upload Section */
-        .excel-upload {
-            padding: 40px 0;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-        
-        .upload-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .upload-btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--complementary);
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 700;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .upload-btn:hover {
-            background-color: #e6a520;
-        }
-        
-        #file-name {
-            margin-top: 10px;
-            color: var(--complementary);
-            font-weight: 500;
-        }
-        
-        /* Image Modal */
-        .modal {
+        /* Loading Animation */
+        .loader {
             display: none;
-            position: fixed;
-            z-index: 3000;
-            padding-top: 50px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(5px);
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(247, 184, 55, 0.3);
+            border-radius: 50%;
+            border-top: 5px solid var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
         }
         
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        #close-modal {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 3001;
-        }
-        
-        #close-modal:hover,
-        #close-modal:focus {
-            color: var(--primary);
-            text-decoration: none;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Animations */
@@ -875,15 +848,14 @@
                 grid-template-columns: 1fr;
             }
             
-            .modal-content {
-                max-width: 95%;
-                max-height: 80%;
+            .filter-row {
+                flex-direction: column;
+                align-items: center;
             }
             
-            #close-modal {
-                top: 10px;
-                right: 15px;
-                font-size: 30px;
+            .filter-group {
+                width: 100%;
+                max-width: 100%;
             }
         }
         
@@ -959,15 +931,8 @@
         </ul>
     </div>
 
-    <!-- Hero Section with Video -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="video-container">
-            <video autoplay muted loop playsinline>
-                <source src="./images/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="overlay"></div>
-        </div>
         <div class="container hero-content">
             <h2>أفضل الحلول <span>الكهربائية</span> لمشاريعك</h2>
             <p>شركة الأنوار تقدم أحدث الأدوات والمعدات الكهربائية بجودة عالية وأسعار تنافسية لتناسب جميع احتياجاتك</p>
@@ -975,12 +940,6 @@
             <a href="#features" class="btn btn-secondary">خدماتنا</a>
         </div>
     </section>
-    
-    <!-- Image Modal -->
-    <div id="image-modal" class="modal">
-        <span id="close-modal">&times;</span>
-        <img class="modal-content" id="modal-image">
-    </div>
     
     <!-- Features Section with Flexbox -->
     <section class="features" id="features">
@@ -1019,94 +978,38 @@
             <div class="section-title">
                 <h2>منتجاتنا الكهربائية</h2>
             </div>
-            <div class="products-filter">
-                <button class="filter-btn active" data-filter="all">الكل</button>
-                <button class="filter-btn" data-filter="أسلاك وكابلات">أسلاك وكابلات</button>
-                <button class="filter-btn" data-filter="مفاتيح ومقابس">مفاتيح ومقابس</button>
-                <button class="filter-btn" data-filter="لمبات وإضاءة">لمبات وإضاءة</button>
-                <button class="filter-btn" data-filter="أدوات كهربائية">أدوات كهربائية</button>
+            
+            <!-- Advanced Filters -->
+            <div class="advanced-filters">
+                <h3 class="filters-title"><i class="fas fa-filter"></i>تصفية المنتجات</h3>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="category-select">اختر الفئة</label>
+                        <select id="category-select">
+                            <option value="">جميع الفئات</option>
+                            <!-- Will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="company-select">اختر الشركة</label>
+                        <select id="company-select">
+                            <option value="">جميع الشركات</option>
+                            <!-- Will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="apply-filter-btn" id="apply-filter">
+                    <i class="fas fa-check"></i> عرض المنتجات المختارة
+                </button>
             </div>
+            
+            <div class="loader" id="products-loader"></div>
+            
             <div class="products-grid" id="products-container">
-                <!-- Products will be loaded dynamically from Excel -->
-                <div class="product-card">
-                    <span class="product-badge best-seller-badge">الأكثر مبيعاً</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591375372223-6b1f3d2c9b7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="لمبة ليد">
-                        <div class="zoom-icon">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h3>لمبة ليد 20 وات</h3>
-                        <div class="product-price">45 ج.م <span class="old-price">55 ج.م</span></div>
-                        <p class="product-description">لمبة موفرة للطاقة بجودة عالية، عمر افتراضي طويل، إضاءة دافئة</p>
-                        <div class="product-notes">
-                            <div class="notes-title">ملاحظات:</div>
-                            <div>خصم 10% للكميات فوق 50 قطعة</div>
-                        </div>
-                        <a href="https://wa.me/2001009226113?text=أريد%20طلب%20لمبة%20ليد%2020%20وات" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> طلب عبر واتساب</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-badge discount-badge">خصم 15%</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1603145733146-ae562a55031e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="مقبس كهربائي">
-                        <div class="zoom-icon">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h3>مقبس كهربائي ثلاثي</h3>
-                        <div class="product-price">25 ج.م <span class="old-price">30 ج.م</span></div>
-                        <p class="product-description">مقبس ثلاثي بجودة عالية، مزود بحماية من زيادة التيار</p>
-                        <div class="product-notes">
-                            <div class="notes-title">ملاحظات:</div>
-                            <div>عرض لفترة محدودة فقط</div>
-                        </div>
-                        <a href="https://wa.me/2001009226113?text=أريد%20طلب%20مقبس%20كهربائي%20ثلاثي" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> طلب عبر واتساب</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-badge special-offer-badge">عرض خاص</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1545126178-862cdb469409?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="كابل كهربائي">
-                        <div class="zoom-icon">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h3>كابل كهربائي 2.5 مم</h3>
-                        <div class="product-price">120 ج.م / رول</div>
-                        <p class="product-description">كابل كهربائي عالي الجودة، معزول بطبقة PVC، طول 100 متر</p>
-                        <div class="product-notes">
-                            <div class="notes-title">ملاحظات:</div>
-                            <div>شحن مجاني للطلبات فوق 1000 ج.م</div>
-                        </div>
-                        <a href="https://wa.me/2001009226113?text=أريد%20طلب%20كابل%20كهربائي%202.5%20مم" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> طلب عبر واتساب</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <span class="product-badge best-seller-badge">جديد</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="أدوات كهربائية">
-                        <div class="zoom-icon">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h3>طقم أدوات كهربائية</h3>
-                        <div class="product-price">350 ج.م</div>
-                        <p class="product-description">طقم متكامل من الأدوات الكهربائية الاحترافية لجميع الأعمال</p>
-                        <div class="product-notes">
-                            <div class="notes-title">ملاحظات:</div>
-                            <div>هدية مجانية مع كل طلب: حقيبة أدوات</div>
-                        </div>
-                        <a href="https://wa.me/2001009226113?text=أريد%20طلب%20طقم%20أدوات%20كهربائية" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> طلب عبر واتساب</a>
-                    </div>
-                </div>
+                <!-- Products will be loaded dynamically from Excel after filtering -->
             </div>
         </div>
     </section>
@@ -1163,7 +1066,6 @@
                     
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1Cw8tU4WuL/"><i class="fab fa-facebook-f"></i></a>
-                        
                         <a href="https://www.instagram.com/elanwarelectric?igsh=MWlkeXU5dzU5YjE3ZA=="><i class="fab fa-instagram"></i></a>
                         <a href="https://www.tiktok.com/@elanwar70?_t=ZS-8yk413Oef1G&_r=1"><i class="fab fa-tiktok"></i></a>
                     </div>
@@ -1220,21 +1122,6 @@
             }
         });
         
-        // Filter products
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                // In a real implementation, here you would filter the products
-            });
-        });
-        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1253,86 +1140,104 @@
             });
         });
         
-        // Image Modal functionality
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-image');
-        const closeModal = document.getElementById('close-modal');
-        
-        // Function to open modal with image
-        function openModal(imgSrc) {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            modalImg.src = imgSrc;
-        }
-        
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close modal when clicking outside the image
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Set up zoom functionality for all product images
-        document.addEventListener('click', function(e) {
-            const zoomIcon = e.target.closest('.zoom-icon');
-            if (zoomIcon) {
-                const img = zoomIcon.closest('.product-img').querySelector('img');
-                openModal(img.src);
-            }
-        });
-        
         let productsData = [];
-
-        async function loadProductsFromExcel() {
-            try {
-                const response = await fetch('products.xlsx');
-                if (!response.ok) throw new Error('لم يتم العثور على ملف المنتجات');
-
-                const data = await response.arrayBuffer();
-                const workbook = XLSX.read(data, { type: 'array' });
-
-                const sheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[sheetName];
-
-                const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-                productsData = jsonData;
-                displayProducts(productsData);
-
-            } catch (error) {
-                console.error(error);
-                // Keep the default products if Excel fails to load
-            }
+        let categories = [];
+        
+        // DOM elements
+        const categorySelect = document.getElementById('category-select');
+        const companySelect = document.getElementById('company-select');
+        const applyFilterBtn = document.getElementById('apply-filter');
+        const productsLoader = document.getElementById('products-loader');
+        const productsContainer = document.getElementById('products-container');
+        
+        // Function to populate categories dropdown
+        function populateCategories() {
+            categorySelect.innerHTML = '<option value="">جميع الفئات</option>';
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
         }
-
-        // عرض المنتجات مع ملاحظات الخصومات والعروض
+        
+        // Function to populate companies dropdown based on selected category
+        function populateCompanies() {
+            const selectedCategory = categorySelect.value;
+            companySelect.innerHTML = '<option value="">جميع الشركات</option>';
+            
+            if (!selectedCategory) return;
+            
+            // Get unique companies for selected category
+            const uniqueCompanies = new Set();
+            
+            productsData.forEach(product => {
+                if (product.الفئة === selectedCategory && product.الشركة) {
+                    uniqueCompanies.add(product.الشركة);
+                }
+            });
+            
+            // Add companies to dropdown
+            Array.from(uniqueCompanies).forEach(company => {
+                const option = document.createElement('option');
+                option.value = company;
+                option.textContent = company;
+                companySelect.appendChild(option);
+            });
+        }
+        
+        // Function to extract unique categories
+        function extractUniqueValues() {
+            const uniqueCategories = new Set();
+            
+            productsData.forEach(product => {
+                if (product.الفئة) uniqueCategories.add(product.الفئة);
+            });
+            
+            categories = Array.from(uniqueCategories);
+            populateCategories();
+        }
+        
+        // Function to filter products based on selected category and company
+        function filterProducts() {
+            const selectedCategory = categorySelect.value;
+            const selectedCompany = companySelect.value;
+            
+            let filteredProducts = productsData;
+            
+            if (selectedCategory) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.الفئة === selectedCategory
+                );
+            }
+            
+            if (selectedCompany) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.الشركة === selectedCompany
+                );
+            }
+            
+            displayProducts(filteredProducts);
+        }
+        
+        // Display products with notes and discounts
         function displayProducts(products) {
-            const productsContainer = document.getElementById('products-container');
             productsContainer.innerHTML = '';
-
+            
+            if (products.length === 0) {
+                productsContainer.innerHTML = `
+                    <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-search" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--complementary); margin-bottom: 10px;">لم يتم العثور على منتجات</h3>
+                        <p style="color: #6c757d;">لا توجد منتجات مطابقة لاختيارك، جرب اختيارات أخرى</p>
+                    </div>
+                `;
+                return;
+            }
+            
             products.forEach(product => {
-                // أيقونة الفئة
-                let iconClass = 'fas fa-bolt';
-                if (product.الفئة && product.الفئة.includes('لمبات')) iconClass = 'fas fa-lightbulb';
-                else if (product.الفئة && product.الفئة.includes('مفاتيح')) iconClass = 'fas fa-plug';
-                else if (product.الفئة && product.الفئة.includes('أدوات')) iconClass = 'fas fa-toolbox';
-                
-                // شارة المنتج بناءً على الملاحظات
+                // Product badge based on notes
                 let badge = '';
                 let badgeClass = 'product-badge';
                 
@@ -1348,12 +1253,12 @@
                     badge = `<span class="${badgeClass}">${product.ملاحظات}</span>`;
                 }
                 
-                // تحديد إذا كان هناك سعر قديم للعرض
+                // Determine if there's an old price for display
                 let oldPrice = '';
                 if (product.السعر_القديم) {
                     oldPrice = `<span class="old-price">${product.السعر_القديم} ج.م</span>`;
                 }
-
+                
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 
@@ -1361,15 +1266,20 @@
                     ${badge}
                     <div class="product-img">
                         <img src="${product.صورة || 'https://via.placeholder.com/300x200?text=صورة+المنتج'}" alt="${product.اسم || 'منتج'}">
-                        <div class="zoom-icon">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
                     </div>
                     <div class="product-content">
                         <h3>${product.اسم || 'منتج'}</h3>
+                        <div class="product-company">${product.الشركة || ''}</div>
                         <div class="product-price">${product.السعر || '0'} ج.م ${oldPrice}</div>
                         <p class="product-description">${product.الوصف || 'وصف المنتج'}</p>
-                       
+                        
+                        ${product.ملاحظات ? `
+                        <div class="product-notes">
+                            <div class="notes-title">ملاحظات:</div>
+                            <div>${product.ملاحظات}</div>
+                        </div>
+                        ` : ''}
+                        
                         <a href="https://wa.me/2001009226113?text=أريد%20طلب%20${encodeURIComponent(product.اسم || 'منتج')}" class="whatsapp-btn">
                             <i class="fab fa-whatsapp"></i> طلب عبر واتساب
                         </a>
@@ -1379,48 +1289,59 @@
                 productsContainer.appendChild(productCard);
             });
         }
-
-        // تحميل المنتجات عند فتح الصفحة
-        window.addEventListener('DOMContentLoaded', loadProductsFromExcel);
-        function filterProducts(category) {
-            if (category === 'all') {
-                displayProducts(productsData);
-                return;
+        
+        // Load products from Excel
+        async function loadProductsFromExcel() {
+            try {
+                productsLoader.style.display = 'block';
+                
+                // Fetch the Excel file
+                const response = await fetch('products.xlsx');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const arrayBuffer = await response.arrayBuffer();
+                const data = new Uint8Array(arrayBuffer);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // Get first sheet
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                
+                // Convert to JSON
+                productsData = XLSX.utils.sheet_to_json(worksheet);
+                
+                // Extract unique values for filters
+                extractUniqueValues();
+                
+                // Hide loader
+                productsLoader.style.display = 'none';
+                
+                // Show success message
+                console.log('تم تحميل المنتجات بنجاح:', productsData.length + ' منتجات');
+                
+            } catch (error) {
+                console.error('حدث خطأ أثناء تحميل المنتجات:', error);
+                productsLoader.style.display = 'none';
+                
+                productsContainer.innerHTML = `
+                    <div class="error-message" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--complementary); margin-bottom: 10px;">حدث خطأ في تحميل المنتجات</h3>
+                        <p style="color: #6c757d;">يرجى التأكد من وجود ملف products.xlsx في الخادم</p>
+                        <p style="color: #6c757d; margin-top: 10px;">${error.message}</p>
+                    </div>
+                `;
             }
-            
-            const filteredProducts = productsData.filter(product => 
-                product.الفئة && product.الفئة.includes(category)
-            );
-            
-            displayProducts(filteredProducts);
         }
-
-        // إعداد أحداث التصفية
-        function setupFilterEvents() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // إزالة النشط من جميع الأزرار
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    
-                    // إضافة النشط للزر المضغوط
-                    btn.classList.add('active');
-                    
-                    // تنفيذ التصفية
-                    const filterValue = btn.getAttribute('data-filter');
-                    filterProducts(filterValue);
-                });
-            });
-        }
-
-        // تحميل المنتجات عند فتح الصفحة
-        window.addEventListener('DOMContentLoaded', () => {
-            loadProductsFromExcel();
-            setupFilterEvents();
+        
+        // Event listeners
+        categorySelect.addEventListener('change', function() {
+            populateCompanies();
         });
+        
+        applyFilterBtn.addEventListener('click', filterProducts);
+        
+        // Load products when the page is loaded
+        window.addEventListener('DOMContentLoaded', loadProductsFromExcel);
     </script>
 </body>
-
 </html>
-
