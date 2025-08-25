@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <!-- إضافة مكتبة SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --primary: #f7b837;
@@ -138,6 +141,7 @@
         
         .mobile-menu.active {
             right: 0;
+            overflow-y: auto;
         }
         
         .mobile-menu-header {
@@ -466,7 +470,7 @@
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
+           
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
         
@@ -517,6 +521,7 @@
             transform: scale(1.05);
         }
         
+        /* تحسينات لأيقونة التكبير */
         .zoom-icon {
             position: absolute;
             bottom: 10px;
@@ -533,6 +538,7 @@
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.3s ease;
+            z-index: 5;
         }
         
         .product-img:hover .zoom-icon {
@@ -595,6 +601,77 @@
             margin-bottom: 5px;
         }
         
+        /* Quantity Input - تحسين التصميم */
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .quantity-label {
+            font-weight: 600;
+            color: var(--complementary);
+            font-size: 0.95rem;
+        }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .quantity-btn {
+            background-color: var(--primary);
+            border: none;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            color: white;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--complementary);
+        }
+        
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .quantity-value {
+            width: 50px;
+            text-align: center;
+            border: none;
+            padding: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--complementary);
+            background-color: white;
+        }
+        
+        /* إزالة أسهم زيادة/نقصان العدد في متصفحات معينة */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
         .whatsapp-btn {
             display: block;
             width: 100%;
@@ -602,16 +679,20 @@
             color: white;
             text-align: center;
             padding: 12px;
-            border-radius: 5px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s ease;
             margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
         
         .whatsapp-btn:hover {
             background-color: #128C7E;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
         }
         
         .whatsapp-btn i {
@@ -800,6 +881,69 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* نافذة عرض الصورة المكبرة */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
         /* Animations */
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -842,6 +986,29 @@
         
         .floating {
             animation: float 3s ease-in-out infinite;
+        }
+        
+        /* SweetAlert Customization */
+        .swal2-popup {
+            border-radius: 15px !important;
+            font-family: 'Tajawal', sans-serif !important;
+        }
+        
+        .swal2-title {
+            color: var(--complementary) !important;
+            font-size: 1.8rem !important;
+        }
+        
+        .swal2-confirm {
+            background-color: var(--primary) !important;
+            color: var(--complementary) !important;
+            font-weight: bold !important;
+            border: none !important;
+            padding: 10px 25px !important;
+        }
+        
+        .swal2-confirm:focus {
+            box-shadow: 0 0 0 3px rgba(247, 184, 55, 0.5) !important;
         }
         
         /* Responsive */
@@ -916,6 +1083,18 @@
             .step-card::before {
                 top: -20px;
                 right: 20px;
+            }
+            
+            .quantity-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .quantity-input {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -1111,7 +1290,7 @@
                 </div>
                 
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.456789012345!2d30.93845678901234!3d31.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDA3JzI1LjQiTiAzMMKwNTYnMjEuMiJF!5e0!3m2!1sen!2seg!4v1651234567890" width="100%" height="300" style="border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3424.456789012345!2d30.93845678901234!3d31.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDA3JzI5LjQiTiAzMMKwNTYnMjEuMiJF!5e0!3m2!1sen!2seg!4v1651234567890" width="100%" height="300" style="border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -1136,6 +1315,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- نافذة عرض الصورة المكبرة -->
+    <div class="image-modal" id="imageModal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="image-caption" id="modalCaption"></div>
+    </div>
 
     <script>
         // Mobile Menu Toggle
@@ -1260,6 +1446,117 @@
             displayProducts(filteredProducts);
         }
         
+        // Function to show discount alert using SweetAlert
+        function showDiscountAlert(productName, quantity) {
+            Swal.fire({
+                title: 'عرض خاص!',
+                html: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-gift" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <p style="font-size: 1.2rem;">مبروك! لقد حصلت على خصم إضافي 10%</p>
+                        <p style="font-size: 1rem;">لطلبك ${quantity} قطعة من ${productName}</p>
+                    </div>
+                `,
+                icon: 'success',
+                confirmButtonText: 'متابعة الطلب',
+                confirmButtonColor: '#25D366',
+                showCancelButton: true,
+                cancelButtonText: 'إلغاء',
+                customClass: {
+                    popup: 'swal2-popup'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Continue with the order
+                    window.open(`https://wa.me/2001009226113?text=أريد%20طلب%20${encodeURIComponent(productName)}%20كمية%20${quantity}%20وأريد%20الاستفادة%20من%20خصم%20الكمية`, '_blank');
+                }
+            });
+        }
+        
+        // Function to show welcome discount offer
+        function showWelcomeDiscount() {
+            Swal.fire({
+                title: 'عرض خاص للكميات!',
+                html: `
+                    <div style="text-align: center;">
+                        <i class="fas fa-tags" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <p style="font-size: 1.2rem; margin-bottom: 10px;">احصل على خصم إضافي 10% عند طلب أكثر من 20 قطعة من أي منتج</p>
+                        <p style="font-size: 1rem; color: var(--secondary);">هذا العرض ساري لفترة محدودة</p>
+                    </div>
+                `,
+                icon: 'info',
+                confirmButtonText: 'استعرض المنتجات',
+                confirmButtonColor: 'var(--primary)',
+                showCancelButton: true,
+                cancelButtonText: 'لاحقاً',
+                customClass: {
+                    popup: 'swal2-popup'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Scroll to products section
+                    document.getElementById('products').scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        }
+        
+        // وظائف التكبير وعرض الصورة
+        function setupZoomFunctionality() {
+            const zoomIcons = document.querySelectorAll('.zoom-icon');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('modalCaption');
+            const closeModal = document.getElementById('closeModal');
+            
+            // إضافة حدث النقر لأيقونات التكبير
+            zoomIcons.forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productCard = this.closest('.product-card');
+                    const productImage = productCard.querySelector('.product-img img');
+                    const productName = productCard.querySelector('h3').textContent;
+                    
+                    modal.style.display = 'flex';
+                    setTimeout(() => {
+                        modal.classList.add('active');
+                    }, 10);
+                    
+                    modalImg.src = productImage.src;
+                    captionText.textContent = productName;
+                    
+                    // منع التمرير عند فتح النافذة
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // إغلاق النافذة عند النقر على الزر
+            closeModal.addEventListener('click', function() {
+                closeImageModal();
+            });
+            
+            // إغلاق النافذة عند النقر خارج الصورة
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeImageModal();
+                }
+            });
+            
+            // إغلاق النافذة بالزر Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeImageModal();
+                }
+            });
+            
+            function closeImageModal() {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        }
+        
         // Display products with notes and discounts
         function displayProducts(products) {
             productsContainer.innerHTML = '';
@@ -1275,7 +1572,7 @@
                 return;
             }
             
-            products.forEach(product => {
+            products.forEach((product, index) => {
                 // Product badge based on notes
                 let badge = '';
                 let badgeClass = 'product-badge';
@@ -1305,28 +1602,79 @@
                     ${badge}
                     <div class="product-img">
                         <img src="${product.صورة || 'https://via.placeholder.com/300x200?text=صورة+المنتج'}" alt="${product.اسم || 'منتج'}">
+                        <div class="zoom-icon">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
                     </div>
                     <div class="product-content">
                         <h3>${product.اسم || 'منتج'}</h3>
                         <div class="product-company">${product.الشركة || ''}</div>
+                         ${product.الشركة_الفرعية ? `
+                        
+                            <span>${product.الشركة_الفرعية}</span>
+                            
+                       
+                        ` : ''}
                         <div class="product-price">${product.السعر || '0'} ج.م ${oldPrice}</div>
                         <p class="product-description">${product.الوصف || 'وصف المنتج'}</p>
                         
-                        ${product.ملاحظات ? `
-                        <div class="product-notes">
-                            <div class="notes-title">ملاحظات:</div>
-                            <div>${product.ملاحظات}</div>
+                        <div class="quantity-container">
+                            <span class="quantity-label">الكمية:</span>
+                            <div class="quantity-input">
+                                <button class="quantity-btn minus" data-index="${index}">-</button>
+                                <input type="number" class="quantity-value" id="quantity-${index}" value="1" min="1">
+                                <button class="quantity-btn plus" data-index="${index}">+</button>
+                            </div>
                         </div>
-                        ` : ''}
                         
-                        <a href="https://wa.me/2001009226113?text=أريد%20طلب%20${encodeURIComponent(product.اسم || 'منتج')}" class="whatsapp-btn">
+                       
+                        
+                        <button class="whatsapp-btn" data-index="${index}" data-product="${product.اسم || 'منتج'}">
                             <i class="fab fa-whatsapp"></i> طلب عبر واتساب
-                        </a>
+                        </button>
                     </div>
                 `;
                 
                 productsContainer.appendChild(productCard);
             });
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = btn.getAttribute('data-index');
+                    const input = document.getElementById(`quantity-${index}`);
+                    if (parseInt(input.value) > 1) {
+                        input.value = parseInt(input.value) - 1;
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = btn.getAttribute('data-index');
+                    const input = document.getElementById(`quantity-${index}`);
+                    input.value = parseInt(input.value) + 1;
+                });
+            });
+            
+            // Add event listeners to WhatsApp buttons
+            document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = btn.getAttribute('data-index');
+                    const productName = btn.getAttribute('data-product');
+                    const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
+                    
+                    // Check if quantity is more than 20 for discount
+                    if (quantity >= 20) {
+                        showDiscountAlert(productName, quantity);
+                    } else {
+                        window.open(`https://wa.me/2001009226113?text=أريد%20طلب%20${encodeURIComponent(productName)}%20كمية%20${quantity}`, '_blank');
+                    }
+                });
+            });
+            
+            // إعداد وظيفة التكبير بعد تحميل المنتجات
+            setTimeout(setupZoomFunctionality, 100);
         }
         
         // Load products from Excel
@@ -1357,6 +1705,9 @@
                 // Show success message
                 console.log('تم تحميل المنتجات بنجاح:', productsData.length + ' منتجات');
                 
+                // إعداد وظيفة التكبير بعد تحميل البيانات
+                setTimeout(setupZoomFunctionality, 500);
+                
             } catch (error) {
                 console.error('حدث خطأ أثناء تحميل المنتجات:', error);
                 productsLoader.style.display = 'none';
@@ -1380,9 +1731,12 @@
         applyFilterBtn.addEventListener('click', filterProducts);
         
         // Load products when the page is loaded
-        window.addEventListener('DOMContentLoaded', loadProductsFromExcel);
+        window.addEventListener('DOMContentLoaded', function() {
+            loadProductsFromExcel();
+            
+            // Show welcome discount offer after a short delay
+            setTimeout(showWelcomeDiscount, 2000);
+        });
     </script>
 </body>
 </html>
-
-
